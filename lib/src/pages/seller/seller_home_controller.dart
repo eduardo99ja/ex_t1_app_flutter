@@ -35,4 +35,8 @@ class SellerHomeController {
   void goToUpdatePage() {
     Navigator.pushNamed(context, 'seller/update');
   }
+
+  void goToCreate() {
+    Navigator.pushNamed(context, 'seller/services/create');
+  }
 }

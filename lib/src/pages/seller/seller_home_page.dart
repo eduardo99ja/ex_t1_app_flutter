@@ -113,16 +113,27 @@ class _SellerHomePageState extends State<SellerHomePage> {
             ),
             ListTile(
               onTap: _con.goToUpdatePage,
-              title: Text('Editar perfil'),
+              title: Text('Inicio'),
+              trailing: Icon(Icons.home),
+            ),
+            ListTile(
+              onTap: _con.goToCreate,
+              title: Text('Agregar un servicio'),
+              trailing: Icon(Icons.add),
+            ),
+            ListTile(
+              title: Text('Editar servicio'),
               trailing: Icon(Icons.edit_outlined),
+              onTap: () {},
             ),
             ListTile(
-              title: Text('Mis pedidos'),
-              trailing: Icon(Icons.shopping_cart_outlined),
+              title: Text('Bajas de servicio'),
+              trailing: Icon(Icons.delete),
+              onTap: () {},
             ),
             ListTile(
-              title: Text('Cerrar sesión'),
-              trailing: Icon(Icons.power_settings_new),
+              title: Text('Creditos'),
+              trailing: Icon(Icons.info),
               onTap: () {},
             ),
           ],
