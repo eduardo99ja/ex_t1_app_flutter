@@ -33,6 +33,7 @@ dependencies:
   firebase_core: ^1.6.0
   firebase_database: ^7.2.1
   ndialog: ^4.1.0
+  shared_preferences: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -54,9 +55,22 @@ flutter:
     - assets/json/
 
   fonts:
+    - family: Pacifico
+      fonts:
+        - asset: assets/fonts/Pacifico/Pacifico.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+
+    - family: RobotoMedium
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+
     - family: NimbusSans
       fonts:
         - asset: assets/fonts/NimbusSans/NimbusSanL-Reg.otf
-    - family: Roboto
+
+    - family: OneDay
       fonts:
-        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/OneDay/ONEDAY.ttf

@@ -1,9 +1,13 @@
+import 'package:ex_t1_app/src/pages/login/login_page.dart';
 import 'package:ex_t1_app/src/pages/register/register_page.dart';
 import 'package:ex_t1_app/src/pages/roles/roles_page.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -20,10 +24,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery App ',
-      initialRoute: 'register',
+      initialRoute: 'roles',
       routes: {
         'roles': (BuildContext context) => RolesPage(),
         'register': (BuildContext context) => RegisterPage(),
+        'login': (BuildContext context) => LoginPage(),
       },
       theme: ThemeData(
         primaryColor: MyColors.primaryColor,

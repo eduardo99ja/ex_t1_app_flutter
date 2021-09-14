@@ -1,76 +1,60 @@
-import 'package:flutter/material.dart';
-import 'package:ex_t1_app/src/models/user.dart';
+import 'dart:ffi';
+
 import 'package:ex_t1_app/src/providers/auth_provider.dart';
+import 'package:ex_t1_app/src/utils/shared_pref.dart';
+import 'package:flutter/material.dart';
+
 import 'package:ndialog/ndialog.dart';
 
-class RegisterController {
+class LoginController {
   late BuildContext context;
+  GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
 
-  TextEditingController usernameController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  TextEditingController confirmPasswordController = new TextEditingController();
 
   late AuthProvider _authProvider;
-  late ProgressDialog progressDialog;
+  late SharedPref _sharedPref;
+  String? _typeUser;
 
-  Future? init(BuildContext context) {
+  Future init(BuildContext context) async {
     this.context = context;
     _authProvider = new AuthProvider();
-    progressDialog = ProgressDialog(context,
-        message: Text("Por favor, espere un momento"), title: Text("Cargando"));
+    _sharedPref = new SharedPref();
+    _typeUser = await _sharedPref.read('typeUser');
+    print(_typeUser);
   }
 
-  void register() async {
-    String username = usernameController.text;
+  void goToRegisterPage() {
+    Navigator.pushNamed(context, 'register');
+  }
+
+  void login() async {
+    ProgressDialog _progressDialog = ProgressDialog(context,
+        message: Text("Por favor, espere un momento"), title: Text("Cargando"));
     String email = emailController.text.trim();
-    String confirmPassword = confirmPasswordController.text.trim();
     String password = passwordController.text.trim();
 
-    if (username.isEmpty &&
-        email.isEmpty &&
-        password.isEmpty &&
-        confirmPassword.isEmpty) {
+    if (email.isEmpty && password.isEmpty) {
       final snackBar =
-          SnackBar(content: Text('Debes ingresar todos los campos'));
+          SnackBar(content: Text('Debes ingresar sus credenciales'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
       return;
     }
 
-    if (confirmPassword != password) {
-      final snackBar = SnackBar(content: Text('Las contraseñas no coinciden'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      return;
-    }
-
-    if (password.length < 6) {
-      print('el password debe tener al menos 6 caracteres');
-      final snackBar = SnackBar(
-          content: Text('La contraseña debe tener al menos 6 caracteres'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-      return;
-    }
-
-    progressDialog.show();
+    _progressDialog.show();
 
     try {
-      bool isRegister = await _authProvider.register(email, password);
+      bool isLogin = await _authProvider.login(email, password);
+      _progressDialog.dismiss();
 
-      if (isRegister) {
-        progressDialog.dismiss();
+      if (isLogin) {
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
-      } else {
-        progressDialog.dismiss();
-
-        final snackBar =
-            SnackBar(content: Text('El usuario no se pudó registrar'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        print('El usuario esta logeado');
       }
     } catch (error) {
-      progressDialog.dismiss();
-
+      _progressDialog.dismiss();
       final snackBar = SnackBar(content: Text('Error: $error'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
