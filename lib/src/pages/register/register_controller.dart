@@ -9,6 +9,8 @@ class RegisterController {
   late BuildContext context;
 
   TextEditingController usernameController = new TextEditingController();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController lastnameController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController confirmPasswordController = new TextEditingController();
@@ -33,6 +35,8 @@ class RegisterController {
 
   void register() async {
     String username = usernameController.text;
+    String name = nameController.text;
+    String lastname = lastnameController.text;
     String email = emailController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
     String password = passwordController.text.trim();
@@ -40,7 +44,9 @@ class RegisterController {
     if (username.isEmpty &&
         email.isEmpty &&
         password.isEmpty &&
-        confirmPassword.isEmpty) {
+        confirmPassword.isEmpty &&
+        name.isEmpty &&
+        lastname.isEmpty) {
       final snackBar =
           SnackBar(content: Text('Debes ingresar todos los campos'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -70,11 +76,21 @@ class RegisterController {
 
       if (isRegister) {
         progressDialog.dismiss();
-        User user = User(email: email, password: password, username: username);
+        User user = User(
+            email: email,
+            password: password,
+            username: username,
+            name: name,
+            lastname: lastname,
+            id: _authProvider.getUser().uid);
+        _sharedPref.save('user', user.toJson());
         if (_typeUser == 'seller') {
           await userRef.child('vendedores').push().set({
             "username": usernameController.text,
             "email": emailController.text,
+            "name": user.name,
+            "lastname": user.lastname,
+            "id": user.id
           }).then((_) => {
                 Navigator.pushNamedAndRemoveUntil(
                     context, 'seller/home', (route) => false)
@@ -83,6 +99,9 @@ class RegisterController {
           await userRef.child('clientes').push().set({
             "username": usernameController.text,
             "email": emailController.text,
+            "name": user.name,
+            "lastname": user.lastname,
+            "id": user.id
           }).then((_) => {
                 Navigator.pushNamedAndRemoveUntil(
                     context, 'client/home', (route) => false)

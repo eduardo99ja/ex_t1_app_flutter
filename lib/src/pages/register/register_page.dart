@@ -34,6 +34,8 @@ class _RegisterPageState extends State<RegisterPage> {
             _bannerApp(),
             _textRegister(),
             _textFieldUsername(),
+            _textFieldName(),
+            _textFieldLastname(),
             _textFieldEmail(),
             _textFieldPassword(),
             _textFieldConfirmPassword(),
@@ -73,8 +75,34 @@ class _RegisterPageState extends State<RegisterPage> {
         child: TextField(
           controller: _con.usernameController,
           decoration: InputDecoration(
-              hintText: 'Nombre completo',
+              hintText: 'Nombre de usuario',
               labelText: 'Nombre de usuario',
+              suffixIcon: Icon(
+                Icons.person_outline,
+                color: utils.MyColors.primaryColor,
+              )),
+        ),
+      );
+  Widget _textFieldName() => Container(
+        margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: TextField(
+          controller: _con.nameController,
+          decoration: InputDecoration(
+              hintText: 'Nombre completo',
+              labelText: 'Nombre(s)',
+              suffixIcon: Icon(
+                Icons.person_outline,
+                color: utils.MyColors.primaryColor,
+              )),
+        ),
+      );
+  Widget _textFieldLastname() => Container(
+        margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: TextField(
+          controller: _con.lastnameController,
+          decoration: InputDecoration(
+              hintText: 'Apellidos',
+              labelText: 'Apellidos',
               suffixIcon: Icon(
                 Icons.person_outline,
                 color: utils.MyColors.primaryColor,

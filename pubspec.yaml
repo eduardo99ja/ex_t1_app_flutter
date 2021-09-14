@@ -52,7 +52,6 @@ flutter:
 
   assets:
     - assets/img/
-    - assets/json/
 
   fonts:
     - family: Pacifico
