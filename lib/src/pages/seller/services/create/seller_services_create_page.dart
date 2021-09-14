@@ -42,6 +42,10 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
           _textFieldDescription(),
           _textFieldContact(),
           _textFieldPrice(),
+          SizedBox(height: 30),
+          Center(
+            child: Text('Su direccion se tomará por su ubicación actual'),
+          ),
           Container(
             height: 250.0,
             child: Stack(
@@ -188,11 +192,11 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
           ? Card(
               elevation: 3.0,
               child: Container(
-                height: 100,
+                height: 200,
                 width: MediaQuery.of(context).size.width * 0.26,
                 child: Image.file(
                   imageFile,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               ),
             )
@@ -215,8 +219,8 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(vertical: 30, horizontal: 50),
       child: ElevatedButton(
-        onPressed: () {},
-        child: Text('CREAR DIRECCION'),
+        onPressed: _con.createService,
+        child: Text('CREAR SERVICIO'),
         style: ElevatedButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),

@@ -28,6 +28,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
     return Scaffold(
       key: _con.key,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         flexibleSpace: Column(
           children: [
             SizedBox(height: 40),
@@ -43,7 +44,10 @@ class _SellerHomePageState extends State<SellerHomePage> {
             },
             child: Container(
               margin: EdgeInsets.only(right: 10),
-              child: Icon(Icons.logout),
+              child: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
             ),
           )
         ],

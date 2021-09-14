@@ -2,8 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ex_t1_app/src/models/service.dart';
 import 'package:ex_t1_app/src/models/user.dart';
+import 'package:ex_t1_app/src/providers/storage_provider.dart';
 import 'package:ex_t1_app/src/utils/shared_pref.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,7 +18,7 @@ import 'package:ndialog/ndialog.dart';
 class SellerServicesCreateController {
   late BuildContext context;
   late Function refresh;
-
+  List<Service> items = [];
   TextEditingController nameController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController contactController = new TextEditingController();
@@ -27,17 +31,21 @@ class SellerServicesCreateController {
   SharedPref sharedPref = new SharedPref();
   PickedFile? pickedFile;
   Position? _position;
+  late final serviceRef;
+  late StorageProvider _storageProvider;
 
   File? imageFile1;
 
   late ProgressDialog _progressDialog;
   CameraPosition initialPosition =
-      CameraPosition(target: LatLng(-99.5316192, 19.404283), zoom: 16.0);
+      CameraPosition(target: LatLng(-99.5316192, -99.5316192), zoom: 16.0);
   Completer<GoogleMapController> _mapController = Completer();
 
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
+    serviceRef = FirebaseDatabase.instance.reference().child('services');
+    _storageProvider = new StorageProvider();
     checkGPS();
     _progressDialog = new ProgressDialog(context,
         title: Text('Expere....'), message: Text('Cargando...'));
@@ -140,5 +148,50 @@ class SellerServicesCreateController {
       controller.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(target: LatLng(lat, lng), zoom: 16, bearing: 0)));
     }
+  }
+
+  void createService() async {
+    String imageUrl;
+
+    String name = nameController.text;
+    String description = descriptionController.text;
+    String contact = contactController.text;
+    String price = priceController.text;
+
+    if (name.isEmpty ||
+        description.isEmpty ||
+        contact.isEmpty ||
+        price.isEmpty) {
+      final snackBar =
+          SnackBar(content: Text('Debes ingresar todos los campos'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return;
+    }
+    _progressDialog.show();
+    if (pickedFile != null) {
+      TaskSnapshot snapshot = await _storageProvider.uploadFile(pickedFile!);
+      imageUrl = await snapshot.ref.getDownloadURL();
+    } else {
+      final snackBar =
+          SnackBar(content: Text('No ha seleccionado ninguna imagen'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      _progressDialog.dismiss();
+      return;
+    }
+
+    Service _service = Service(
+        contact: contactController.text,
+        name: nameController.text,
+        description: descriptionController.text,
+        lat: _position!.latitude.toString(),
+        lng: _position!.longitude.toString(),
+        img: imageUrl,
+        price: priceController.text,
+        seller: user!.email);
+    await serviceRef
+        .push()
+        .set(_service.toJson())
+        .then((_) => {Navigator.pop(context)});
+    _progressDialog.dismiss();
   }
 }
