@@ -22,15 +22,13 @@ class RolesController {
   void checkIfUserIsAuth() {
     bool isSigned = _authProvider.isSignedIn();
     if (isSigned) {
-      print('ya esta');
       if (_typeUser == 'client') {
-        print('ya esta');
-        // Navigator.pushNamedAndRemoveUntil(
-        //     context, 'client/home', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'client/home', (route) => false);
         // Navigator.pushNamed(context, 'client/map');
       } else {
-        // Navigator.pushNamedAndRemoveUntil(
-        //     context, 'seller/home', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'seller/home', (route) => false);
         // Navigator.pushNamed(context, 'driver/map');
       }
     } else {

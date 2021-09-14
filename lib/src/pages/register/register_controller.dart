@@ -69,20 +69,25 @@ class RegisterController {
       bool isRegister = await _authProvider.register(email, password);
 
       if (isRegister) {
+        progressDialog.dismiss();
         User user = User(email: email, password: password, username: username);
         if (_typeUser == 'seller') {
           await userRef.child('vendedores').push().set({
             "username": usernameController.text,
             "email": emailController.text,
-          }).then((_) => {Navigator.pop(context)});
+          }).then((_) => {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, 'seller/home', (route) => false)
+              });
         } else if (_typeUser == 'client') {
           await userRef.child('clientes').push().set({
             "username": usernameController.text,
             "email": emailController.text,
-          }).then((_) => {Navigator.pop(context)});
+          }).then((_) => {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, 'client/home', (route) => false)
+              });
         }
-        progressDialog.dismiss();
-        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         progressDialog.dismiss();
 

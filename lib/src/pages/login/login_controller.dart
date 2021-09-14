@@ -50,7 +50,13 @@ class LoginController {
       _progressDialog.dismiss();
 
       if (isLogin) {
-        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+        if (_typeUser == 'seller') {
+          Navigator.pushNamedAndRemoveUntil(
+              context, 'seller/home', (route) => false);
+        } else if (_typeUser == 'client') {
+          Navigator.pushNamedAndRemoveUntil(
+              context, 'client/home', (route) => false);
+        }
         print('El usuario esta logeado');
       }
     } catch (error) {
