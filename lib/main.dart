@@ -1,8 +1,15 @@
+import 'package:ex_t1_app/src/pages/client/home/client_home_page.dart';
+import 'package:ex_t1_app/src/pages/login/login_page.dart';
+import 'package:ex_t1_app/src/pages/register/register_page.dart';
 import 'package:ex_t1_app/src/pages/roles/roles_page.dart';
+import 'package:ex_t1_app/src/pages/seller/seller_home_page.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -22,6 +29,10 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'roles',
       routes: {
         'roles': (BuildContext context) => RolesPage(),
+        'register': (BuildContext context) => RegisterPage(),
+        'login': (BuildContext context) => LoginPage(),
+        'seller/home': (BuildContext context) => SellerHomePage(),
+        'client/home': (BuildContext context) => ClientHomePage(),
       },
       theme: ThemeData(
         primaryColor: MyColors.primaryColor,

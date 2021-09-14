@@ -1,3 +1,4 @@
+import 'package:ex_t1_app/src/pages/roles/roles_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -9,9 +10,13 @@ class RolesPage extends StatefulWidget {
 }
 
 class _RolesPageState extends State<RolesPage> {
+  RolesController _con = new RolesController();
   @override
   void initState() {
     super.initState();
+    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+      _con.init(context);
+    });
   }
 
   @override
@@ -36,7 +41,7 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   Widget _cardRolSeller() => GestureDetector(
-        onTap: () {},
+        onTap: () => _con.goToLoginPage('seller'),
         child: Column(
           children: [
             Container(
@@ -58,7 +63,7 @@ class _RolesPageState extends State<RolesPage> {
         ),
       );
   Widget _cardRolClient() => GestureDetector(
-        onTap: () {},
+        onTap: () => _con.goToLoginPage('client'),
         child: Column(
           children: [
             Container(

@@ -28,6 +28,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  flutter_custom_clippers: ^2.0.0
+  firebase_auth: ^3.1.0
+  firebase_core: ^1.6.0
+  firebase_database: ^7.2.1
+  ndialog: ^4.1.0
+  shared_preferences: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -46,12 +52,24 @@ flutter:
 
   assets:
     - assets/img/
-    - assets/json/
 
   fonts:
+    - family: Pacifico
+      fonts:
+        - asset: assets/fonts/Pacifico/Pacifico.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+
+    - family: RobotoMedium
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+
     - family: NimbusSans
       fonts:
         - asset: assets/fonts/NimbusSans/NimbusSanL-Reg.otf
-    - family: Roboto
+
+    - family: OneDay
       fonts:
-        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/OneDay/ONEDAY.ttf
