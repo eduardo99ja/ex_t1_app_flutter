@@ -28,6 +28,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
     return Scaffold(
       key: _con.key,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         flexibleSpace: Column(
           children: [
             SizedBox(height: 40),
@@ -43,7 +44,10 @@ class _SellerHomePageState extends State<SellerHomePage> {
             },
             child: Container(
               margin: EdgeInsets.only(right: 10),
-              child: Icon(Icons.logout),
+              child: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
             ),
           )
         ],
@@ -113,16 +117,27 @@ class _SellerHomePageState extends State<SellerHomePage> {
             ),
             ListTile(
               onTap: _con.goToUpdatePage,
-              title: Text('Editar perfil'),
+              title: Text('Inicio'),
+              trailing: Icon(Icons.home),
+            ),
+            ListTile(
+              onTap: _con.goToCreate,
+              title: Text('Agregar un servicio'),
+              trailing: Icon(Icons.add),
+            ),
+            ListTile(
+              title: Text('Editar servicio'),
               trailing: Icon(Icons.edit_outlined),
+              onTap: () {},
             ),
             ListTile(
-              title: Text('Mis pedidos'),
-              trailing: Icon(Icons.shopping_cart_outlined),
+              title: Text('Bajas de servicio'),
+              trailing: Icon(Icons.delete),
+              onTap: () {},
             ),
             ListTile(
-              title: Text('Cerrar sesión'),
-              trailing: Icon(Icons.power_settings_new),
+              title: Text('Creditos'),
+              trailing: Icon(Icons.info),
               onTap: () {},
             ),
           ],
