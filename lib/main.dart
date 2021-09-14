@@ -1,3 +1,4 @@
+import 'package:ex_t1_app/src/pages/register/register_page.dart';
 import 'package:ex_t1_app/src/pages/roles/roles_page.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery App ',
-      initialRoute: 'roles',
+      initialRoute: 'register',
       routes: {
         'roles': (BuildContext context) => RolesPage(),
+        'register': (BuildContext context) => RegisterPage(),
       },
       theme: ThemeData(
         primaryColor: MyColors.primaryColor,
