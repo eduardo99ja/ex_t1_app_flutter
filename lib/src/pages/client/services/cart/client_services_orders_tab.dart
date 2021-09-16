@@ -64,27 +64,33 @@ class _ClientServicesOrdersTabState extends State<ClientServicesOrdersTab> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          subtitle: Text(
-                            '${_services![position].servicio!.description}',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 18.0,
-                              fontStyle: FontStyle.italic,
-                            ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Tel. ${_services![position].servicio!.contact}',
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                              Text(
+                                'Fecha entrega: ${_services![position].fechaProbableEntrega}',
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 18.0,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
                           ),
                           leading: Column(
                             children: [
                               CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 17.0,
-                                child: Text(
-                                  '${position + 1}',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 21.0,
-                                  ),
-                                ),
-                              )
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      NetworkImage(_services![position].servicio!.img!))
                             ],
                           ),
                           onTap: () {},

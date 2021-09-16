@@ -104,6 +104,9 @@ class _ClientInfoServiceState extends State<ClientInfoService> {
                       ),
                       height: 200.0,
                     ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     Expanded(child: Container()),
                     Row(
                       children: [

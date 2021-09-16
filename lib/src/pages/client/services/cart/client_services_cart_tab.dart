@@ -66,8 +66,8 @@ class _ClientServicesCartTabState extends State<ClientServicesCartTab> {
                               color: MyColors.primaryColorDark,
                               child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Eliminar servicio',
-                                    style: TextStyle(color: Colors.white)),
+                                child:
+                                    Text('Confirmar compra', style: TextStyle(color: Colors.white)),
                               )),
                           child: Row(
                             children: [
@@ -85,7 +85,7 @@ class _ClientServicesCartTabState extends State<ClientServicesCartTab> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${_services![position].servicio!.description}',
+                                          'Tel. ${_services![position].servicio!.contact}',
                                           style: TextStyle(
                                             color: Colors.grey[600],
                                             fontSize: 18.0,
@@ -93,7 +93,7 @@ class _ClientServicesCartTabState extends State<ClientServicesCartTab> {
                                           ),
                                         ),
                                         Text(
-                                          '${_services![position].servicio!.contact}',
+                                          'Vendedor: ${_services![position].servicio!.seller}',
                                           style: TextStyle(
                                             color: Colors.grey[600],
                                             fontSize: 18.0,
@@ -104,16 +104,9 @@ class _ClientServicesCartTabState extends State<ClientServicesCartTab> {
                                   leading: Column(
                                     children: [
                                       CircleAvatar(
-                                        backgroundColor: Colors.grey,
-                                        radius: 17.0,
-                                        child: Text(
-                                          '${position + 1}',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 21.0,
-                                          ),
-                                        ),
-                                      )
+                                          radius: 25.0,
+                                          backgroundImage:
+                                              NetworkImage(_services![position].servicio!.img!))
                                     ],
                                   ),
                                   onTap: () {},
