@@ -39,4 +39,12 @@ class SellerHomeController {
   void goToCreate() {
     Navigator.pushNamed(context, 'seller/services/create');
   }
+
+  void goToList() {
+    Navigator.pushNamed(context, 'seller/services/list');
+  }
+
+  void goToCredits() {
+    Navigator.pushNamed(context, 'credits');
+  }
 }

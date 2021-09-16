@@ -206,7 +206,7 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
                 height: 140,
                 width: MediaQuery.of(context).size.width * 0.26,
                 child: Image(
-                  image: AssetImage('assets/img/add_image.png'),
+                  image: AssetImage('assets/img/add-image-placeholder.png'),
                 ),
               ),
             ),
@@ -232,9 +232,4 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
   void refresh() {
     setState(() {});
   }
-}
-
-class AlwaysDisabledFocusNode extends FocusNode {
-  @override
-  bool get hasFocus => false;
 }

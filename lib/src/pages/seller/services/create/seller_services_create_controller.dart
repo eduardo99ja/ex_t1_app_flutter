@@ -187,7 +187,9 @@ class SellerServicesCreateController {
         lng: _position!.longitude.toString(),
         img: imageUrl,
         price: priceController.text,
-        seller: user!.email);
+        seller: user!.email,
+        status: 'activo');
+
     await serviceRef
         .push()
         .set(_service.toJson())

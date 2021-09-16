@@ -10,6 +10,7 @@ class Service {
   String? img;
   String? price;
   String? seller;
+  String? status;
 
   Service(
       {this.id,
@@ -20,7 +21,8 @@ class Service {
       this.lng,
       this.img,
       this.price,
-      this.seller});
+      this.seller,
+      this.status});
 
   Service.map(dynamic obj) {
     this.id = obj['id'];
@@ -32,9 +34,10 @@ class Service {
     this.img = obj['img'];
     this.price = obj['price'];
     this.seller = obj['seller'];
+    this.status = obj['status'];
   }
 
-  Service.fromSnapshot(DataSnapshot snapShot) {
+  Service.fromSnapShot(DataSnapshot snapShot) {
     id = snapShot.key;
     name = snapShot.value['name'];
     description = snapShot.value['description'];
@@ -44,6 +47,7 @@ class Service {
     img = snapShot.value['img'];
     price = snapShot.value['price'];
     seller = snapShot.value['seller'];
+    status = snapShot.value['status'];
   }
   Map<String, dynamic> toJson() => {
         'contact': contact,
@@ -53,6 +57,7 @@ class Service {
         'lng': lng,
         'img': img,
         'price': price,
-        'seller': seller
+        'seller': seller,
+        'status': status
       };
 }
