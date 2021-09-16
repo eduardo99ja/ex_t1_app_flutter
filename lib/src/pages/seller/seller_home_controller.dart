@@ -51,4 +51,8 @@ class SellerHomeController {
   void goToSearch() {
     Navigator.pushNamed(context, 'seller/services/search');
   }
+
+  void goToOrders() {
+    Navigator.pushNamed(context, 'seller/orders');
+  }
 }

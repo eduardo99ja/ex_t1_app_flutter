@@ -154,7 +154,7 @@ class _ClientInfoServiceState extends State<ClientInfoService> {
       'correoComprador': _authProvider.getUser().email,
       'correoVen': service.contact,
       'statusCompra': 'pendiente',
-      'statusVenta': 'pendiente',
+      'statusVenta': '',
       'fechaProbableEntrega': 'pendiente'
     }).then((_) => Navigator.pop(context));
   }

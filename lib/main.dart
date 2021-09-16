@@ -5,6 +5,7 @@ import 'package:ex_t1_app/src/pages/credits/credits_page.dart';
 import 'package:ex_t1_app/src/pages/login/login_page.dart';
 import 'package:ex_t1_app/src/pages/register/register_page.dart';
 import 'package:ex_t1_app/src/pages/roles/roles_page.dart';
+import 'package:ex_t1_app/src/pages/seller/orders/seller_orders_page.dart';
 import 'package:ex_t1_app/src/pages/seller/seller_home_page.dart';
 import 'package:ex_t1_app/src/pages/seller/services/create/seller_services_create_page.dart';
 import 'package:ex_t1_app/src/pages/seller/services/search/seller_services_search_page.dart';
@@ -43,6 +44,7 @@ class _MyAppState extends State<MyApp> {
         'seller/services/create': (BuildContext context) => SellerServicesCreatePage(),
         'client/home': (BuildContext context) => ClientHomePage(),
         'client/cart': (BuildContext context) => ClientServicesCartPage(),
+        'seller/orders': (BuildContext context) => SellerOrdersPage(),
         'client/services/list': (BuildContext context) => ClientServicesListPage(),
         'seller/services/list': (BuildContext context) => SellerServicesStatus(),
       },

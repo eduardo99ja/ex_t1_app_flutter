@@ -39,8 +39,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
           GestureDetector(
             onTap: () async {
               await _authProvider.signOut();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, 'roles', (route) => false);
+              Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
             },
             child: Container(
               margin: EdgeInsets.only(right: 10),
@@ -125,6 +124,11 @@ class _SellerHomePageState extends State<SellerHomePage> {
               title: Text('Bajas de servicio'),
               trailing: Icon(Icons.delete),
               onTap: _con.goToList,
+            ),
+            ListTile(
+              title: Text('Ventas'),
+              trailing: Icon(Icons.delete),
+              onTap: _con.goToOrders,
             ),
             ListTile(
               title: Text('Creditos'),

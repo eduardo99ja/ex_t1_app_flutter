@@ -165,7 +165,7 @@ class _ClientServicesCartTabState extends State<ClientServicesCartTab> {
       'correoComprador': compra.correoComprador,
       'correoVen': compra.correoVend,
       'statusCompra': 'confirmada',
-      'statusVenta': compra.statusVenta,
+      'statusVenta': 'pendiente',
       'fechaProbableEntrega': compra.fechaProbableEntrega
     }).then((value) {
       setState(() {
