@@ -1,4 +1,5 @@
 import 'package:ex_t1_app/src/pages/client/home/client_home_page.dart';
+import 'package:ex_t1_app/src/pages/client/services/cliente_services_list.dart';
 import 'package:ex_t1_app/src/pages/credits/credits_page.dart';
 import 'package:ex_t1_app/src/pages/login/login_page.dart';
 import 'package:ex_t1_app/src/pages/register/register_page.dart';
@@ -37,13 +38,11 @@ class _MyAppState extends State<MyApp> {
         'register': (BuildContext context) => RegisterPage(),
         'login': (BuildContext context) => LoginPage(),
         'seller/home': (BuildContext context) => SellerHomePage(),
-        'seller/services/search': (BuildContext context) =>
-            SellerServicesSearchPage(),
-        'seller/services/create': (BuildContext context) =>
-            SellerServicesCreatePage(),
+        'seller/services/search': (BuildContext context) => SellerServicesSearchPage(),
+        'seller/services/create': (BuildContext context) => SellerServicesCreatePage(),
         'client/home': (BuildContext context) => ClientHomePage(),
-        'seller/services/list': (BuildContext context) =>
-            SellerServicesStatus(),
+        'client/services/list': (BuildContext context) => ClientServicesListPage(),
+        'seller/services/list': (BuildContext context) => SellerServicesStatus(),
       },
       theme: ThemeData(
         primaryColor: MyColors.primaryColor,

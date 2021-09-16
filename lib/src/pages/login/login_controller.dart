@@ -38,8 +38,7 @@ class LoginController {
     String password = passwordController.text.trim();
 
     if (email.isEmpty && password.isEmpty) {
-      final snackBar =
-          SnackBar(content: Text('Debes ingresar sus credenciales'));
+      final snackBar = SnackBar(content: Text('Debes ingresar sus credenciales'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
       return;
@@ -54,10 +53,8 @@ class LoginController {
       if (isLogin) {
         if (_typeUser == 'seller') {
           bool flag = false;
-          Query _compradorQuery = userRef
-              .child('vendedores')
-              .orderByChild("email")
-              .equalTo(emailController.text);
+          Query _compradorQuery =
+              userRef.child('vendedores').orderByChild("email").equalTo(emailController.text);
 
           _compradorQuery.get().then((value) {
             Map<dynamic, dynamic> map = value.value;
@@ -72,29 +69,26 @@ class LoginController {
                     id: _authProvider.getUser().uid);
                 _sharedPref.save('user', user.toJson());
 
-                Navigator.pushNamedAndRemoveUntil(
-                    context, 'seller/home', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(context, 'seller/home', (route) => false);
               }
             });
 
             if (!flag) {
-              final snackBar = SnackBar(
-                  content: Text(
-                      'El usuario no se encuentra registrado como vendedor'));
+              final snackBar =
+                  SnackBar(content: Text('El usuario no se encuentra registrado como vendedor'));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           });
         } else if (_typeUser == 'client') {
           bool flag = false;
-          Query _compradorQuery = userRef
-              .child('clientes')
-              .orderByChild("email")
-              .equalTo(emailController.text);
+          Query _compradorQuery =
+              userRef.child('clientes').orderByChild("email").equalTo(emailController.text);
 
           _compradorQuery.get().then((value) {
             Map<dynamic, dynamic> map = value.value;
             map.forEach((key, value) {
               if (emailController.text == value['email']) {
+                flag = true;
                 print(value);
                 User user = User(
                     email: value['email'],
@@ -103,14 +97,12 @@ class LoginController {
                     lastname: value['lastname'],
                     id: _authProvider.getUser().uid);
                 _sharedPref.save('user', user.toJson());
-                Navigator.pushNamedAndRemoveUntil(
-                    context, 'client/home', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(context, 'client/home', (route) => false);
               }
             });
             if (!flag) {
-              final snackBar = SnackBar(
-                  content: Text(
-                      'El usuario no se encuentra registrado como vendedor'));
+              final snackBar =
+                  SnackBar(content: Text('El usuario no se encuentra registrado como cliente'));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           });
