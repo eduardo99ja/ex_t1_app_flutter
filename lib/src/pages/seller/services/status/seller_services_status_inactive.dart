@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ex_t1_app/src/models/service.dart';
+import 'package:ex_t1_app/src/pages/seller/services/info/seller_services_info_page.dart';
 import 'package:ex_t1_app/src/providers/auth_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -122,12 +123,12 @@ class _SellerServicesStatusInactiveState
                                     ],
                                   ),
                                   onTap: () {
-                                    // TODO: Ver detalles
-                                    // showModalBottomSheet(
-                                    //     context: context,
-                                    //     builder: (context) => InfoGame(
-                                    //         game: _services![
-                                    //             position])); //Using anonimous function
+                                    showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        context: context,
+                                        builder: (context) => InfoService(
+                                            service: _services![
+                                                position])); //Using anonimous function
                                   },
                                 ),
                               ),
