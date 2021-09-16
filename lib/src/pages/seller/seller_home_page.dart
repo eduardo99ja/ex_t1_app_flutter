@@ -133,7 +133,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
             ListTile(
               title: Text('Bajas de servicio'),
               trailing: Icon(Icons.delete),
-              onTap: () {},
+              onTap: _con.goToList,
             ),
             ListTile(
               title: Text('Creditos'),

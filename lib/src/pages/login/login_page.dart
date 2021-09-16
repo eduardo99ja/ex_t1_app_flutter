@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              'Videojuegos y más',
+              'Encuentra todo lo que buscas',
               style: TextStyle(
                   fontFamily: 'Pacifico',
                   fontSize: 22,
