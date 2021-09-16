@@ -1,4 +1,5 @@
 import 'package:ex_t1_app/src/models/service.dart';
+import 'package:ex_t1_app/src/pages/seller/services/edit/seller_services_edit_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -52,33 +53,23 @@ class _InfoServiceState extends State<InfoService> {
                   ),
                   Text('${widget.service.name}',
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 16)),
+                          fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
                   Text('Descripción: ${widget.service.description}',
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 16)),
+                          fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
                   Text('Precio: \$${widget.service.price}',
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 16)),
+                          fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
                   Text('Contácto: ${widget.service.contact}',
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 16)),
+                          fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
                   Text('Status: ${widget.service.status}',
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 16)),
+                          fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
                   Container(
                     child: Stack(
@@ -110,7 +101,15 @@ class _InfoServiceState extends State<InfoService> {
                       widget.service.status! == 'activo'
                           ? Expanded(
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          SellerServicesEditPage(service: widget.service),
+                                    ),
+                                  );
+                                },
                                 child: Text('Editar'),
                               ),
                             )
@@ -128,8 +127,8 @@ class _InfoServiceState extends State<InfoService> {
 
   Widget mapaView(String lat, String lng) {
     return GoogleMap(
-      initialCameraPosition: CameraPosition(
-          target: LatLng(double.parse(lat), double.parse(lng)), zoom: 16.0),
+      initialCameraPosition:
+          CameraPosition(target: LatLng(double.parse(lat), double.parse(lng)), zoom: 16.0),
       mapType: MapType.normal,
     );
   }

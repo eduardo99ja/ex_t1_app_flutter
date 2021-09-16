@@ -38,8 +38,7 @@ class SellerServicesEditController {
   File? imageFile1;
 
   late ProgressDialog _progressDialog;
-  CameraPosition initialPosition =
-      CameraPosition(target: LatLng(-99.5316192, -99.5316192), zoom: 16.0);
+  CameraPosition initialPosition = CameraPosition(target: LatLng(-99.5316192, -99.5316192), zoom: 16.0);
   Completer<GoogleMapController> _mapController = Completer();
 
   Future init(BuildContext context, Function refresh, Service service) async {
@@ -53,8 +52,7 @@ class SellerServicesEditController {
     contactController.text = service.contact!;
     priceController.text = service.price!;
     checkGPS();
-    _progressDialog = new ProgressDialog(context,
-        title: Text('Expere....'), message: Text('Cargando...'));
+    _progressDialog = new ProgressDialog(context, title: Text('Expere....'), message: Text('Cargando...'));
     user = User.fromJson(await sharedPref.read('user'));
   }
 
@@ -141,8 +139,7 @@ class SellerServicesEditController {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
     }
 
     return await Geolocator.getCurrentPosition();
@@ -151,8 +148,8 @@ class SellerServicesEditController {
   Future animateCameraToPosition(double lat, double lng) async {
     GoogleMapController controller = await _mapController.future;
     if (controller != null) {
-      controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(target: LatLng(lat, lng), zoom: 16, bearing: 0)));
+      controller.animateCamera(
+          CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(lat, lng), zoom: 16, bearing: 0)));
     }
   }
 
@@ -165,12 +162,8 @@ class SellerServicesEditController {
     String contact = contactController.text;
     String price = priceController.text;
 
-    if (name.isEmpty ||
-        description.isEmpty ||
-        contact.isEmpty ||
-        price.isEmpty) {
-      final snackBar =
-          SnackBar(content: Text('Debes ingresar todos los campos'));
+    if (name.isEmpty || description.isEmpty || contact.isEmpty || price.isEmpty) {
+      final snackBar = SnackBar(content: Text('Debes ingresar todos los campos'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return;
     }
@@ -191,10 +184,7 @@ class SellerServicesEditController {
         seller: user!.email,
         status: service.status);
 
-    await serviceRef
-        .child(service.id)
-        .set(_service.toJson())
-        .then((_) => {Navigator.pop(context)});
+    await serviceRef.child(service.id).set(_service.toJson()).then((_) => {Navigator.pop(context)});
     _progressDialog.dismiss();
   }
 }
