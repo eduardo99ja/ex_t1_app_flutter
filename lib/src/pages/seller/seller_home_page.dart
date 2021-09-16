@@ -119,7 +119,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
             ListTile(
               title: Text('Editar servicio'),
               trailing: Icon(Icons.edit_outlined),
-              onTap: () {},
+              onTap: _con.goToSearch,
             ),
             ListTile(
               title: Text('Bajas de servicio'),

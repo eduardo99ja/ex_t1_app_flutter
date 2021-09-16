@@ -5,6 +5,7 @@ import 'package:ex_t1_app/src/pages/register/register_page.dart';
 import 'package:ex_t1_app/src/pages/roles/roles_page.dart';
 import 'package:ex_t1_app/src/pages/seller/seller_home_page.dart';
 import 'package:ex_t1_app/src/pages/seller/services/create/seller_services_create_page.dart';
+import 'package:ex_t1_app/src/pages/seller/services/search/seller_services_search_page.dart';
 import 'package:ex_t1_app/src/pages/seller/services/status/seller_services_status.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,6 +37,8 @@ class _MyAppState extends State<MyApp> {
         'register': (BuildContext context) => RegisterPage(),
         'login': (BuildContext context) => LoginPage(),
         'seller/home': (BuildContext context) => SellerHomePage(),
+        'seller/services/search': (BuildContext context) =>
+            SellerServicesSearchPage(),
         'seller/services/create': (BuildContext context) =>
             SellerServicesCreatePage(),
         'client/home': (BuildContext context) => ClientHomePage(),
