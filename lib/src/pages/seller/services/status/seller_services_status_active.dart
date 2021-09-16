@@ -69,7 +69,7 @@ class _SellerServicesStatusActiveState
                           },
                           secondaryBackground: Container(
                               padding: EdgeInsets.only(left: 8.0),
-                              color: Colors.red,
+                              color: Colors.orangeAccent,
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Text('Marcar como inactivo',
