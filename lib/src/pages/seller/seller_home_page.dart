@@ -129,7 +129,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
             ListTile(
               title: Text('Creditos'),
               trailing: Icon(Icons.info),
-              onTap: () {},
+              onTap: _con.goToCredits,
             ),
           ],
         ),

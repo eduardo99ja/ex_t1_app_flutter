@@ -1,4 +1,5 @@
 import 'package:ex_t1_app/src/pages/client/home/client_home_page.dart';
+import 'package:ex_t1_app/src/pages/credits/credits_page.dart';
 import 'package:ex_t1_app/src/pages/login/login_page.dart';
 import 'package:ex_t1_app/src/pages/register/register_page.dart';
 import 'package:ex_t1_app/src/pages/roles/roles_page.dart';
@@ -31,6 +32,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'roles',
       routes: {
         'roles': (BuildContext context) => RolesPage(),
+        'credits': (BuildContext context) => CreditsPage(),
         'register': (BuildContext context) => RegisterPage(),
         'login': (BuildContext context) => LoginPage(),
         'seller/home': (BuildContext context) => SellerHomePage(),
