@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ex_t1_app/src/models/service.dart';
+import 'package:ex_t1_app/src/pages/seller/services/edit/seller_services_edit_page.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,13 @@ class _SellerServicesSearchPageState extends State<SellerServicesSearchPage> {
   bool searchState = false;
   List<Service>? _services;
   StreamSubscription<Event>? _addServicio;
+  StreamSubscription<Event>? _changeService;
   final _dbRef = FirebaseDatabase.instance.reference().child('services');
   @override
   void initState() {
     super.initState();
     _addServicio = _dbRef.onChildAdded.listen(_agregarService);
+    _changeService = _dbRef.onChildChanged.listen(_updateServices);
     _services = [];
   }
 
@@ -29,6 +32,7 @@ class _SellerServicesSearchPageState extends State<SellerServicesSearchPage> {
   void dispose() {
     super.dispose();
     _addServicio!.cancel();
+    _changeService!.cancel();
   }
 
   @override
@@ -123,14 +127,9 @@ class _SellerServicesSearchPageState extends State<SellerServicesSearchPage> {
                             )
                           ],
                         ),
-                        // onTap: () {
-                        //   showModalBottomSheet(
-                        //       isScrollControlled: true,
-                        //       context: context,
-                        //       builder: (context) => InfoService(
-                        //           service: _services![
-                        //               position])); //Using anonimous function
-                        // },
+                        onTap: () {
+                          infoService(context, _services![position]);
+                        },
                       ),
                     ),
                     Container(
@@ -184,6 +183,24 @@ class _SellerServicesSearchPageState extends State<SellerServicesSearchPage> {
   void _agregarService(Event event) {
     setState(() {
       _services!.add(Service.fromSnapShot(event.snapshot));
+    });
+  }
+
+  void infoService(BuildContext context, Service service) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SellerServicesEditPage(service: service),
+      ),
+    );
+  }
+
+  void _updateServices(Event event) {
+    var oldService =
+        _services!.singleWhere((service) => service.id == event.snapshot.key);
+    setState(() {
+      _services?[_services!.indexOf(oldService)] =
+          Service.fromSnapShot(event.snapshot);
     });
   }
 }
