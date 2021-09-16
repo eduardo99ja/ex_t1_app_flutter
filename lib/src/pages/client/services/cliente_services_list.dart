@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ex_t1_app/src/models/service.dart';
+import 'package:ex_t1_app/src/pages/client/services/client_services_info_page.dart';
 import 'package:ex_t1_app/src/pages/seller/services/edit/seller_services_edit_page.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -18,7 +19,11 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
   List<Service>? _services;
   StreamSubscription<Event>? _addServicio;
   StreamSubscription<Event>? _changeService;
-  final _dbRef = FirebaseDatabase.instance.reference().child('services');
+  final _dbRef = FirebaseDatabase.instance
+      .reference()
+      .child('services')
+      .orderByChild('status')
+      .equalTo('activo');
   @override
   void initState() {
     super.initState();
@@ -88,16 +93,20 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.7),
             itemCount: _services?.length ?? 0,
             itemBuilder: (_, index) {
-              return _cardService(_services![index]);
+              return _cardService(_services![index], index);
             }),
       ),
     );
   }
 
-  Widget _cardService(Service service) {
+  Widget _cardService(Service service, int index) {
     return GestureDetector(
       onTap: () {
-        // _con.openBottomSheet(service);
+        showModalBottomSheet(
+            isScrollControlled: false,
+            context: context,
+            builder: (context) =>
+                ClientInfoService(service: _services![index])); //Using anonimous function
       },
       child: Container(
         height: 250,

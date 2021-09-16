@@ -114,7 +114,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
             ListTile(
               onTap: _con.goToList,
               title: Text('Ver servicios'),
-              trailing: Icon(Icons.list),
+              trailing: Icon(Icons.remove_red_eye_outlined),
             ),
             ListTile(
                 onTap: _con.goToList,
