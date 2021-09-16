@@ -117,7 +117,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
               trailing: Icon(Icons.remove_red_eye_outlined),
             ),
             ListTile(
-                onTap: _con.goToList,
+                onTap: _con.goToCart,
                 title: Text('Mis compras'),
                 trailing: Icon(Icons.shopping_bag)),
             ListTile(

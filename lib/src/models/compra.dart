@@ -27,9 +27,23 @@ class Compra {
     id = snapShot.key;
     correoComprador = snapShot.value['correoComprador'];
     correoVend = snapShot.value['correoVend'];
-    servicio = snapShot.value['servicio'];
+    servicio = _mapeo(snapShot.value['servicio']);
     statusCompra = snapShot.value['statusCompra'];
     statusVenta = snapShot.value['statusVenta'];
     fechaProbableEntrega = snapShot.value['fechaProbableEntrega'];
+  }
+  Service _mapeo(valor) {
+    return Service(
+      id: valor['id'],
+      name: valor['name'],
+      description: valor['description'],
+      price: valor['price'],
+      contact: valor['contact'],
+      img: valor['img'],
+      lat: valor['lat'],
+      lng: valor['lng'],
+      seller: valor['seller'],
+      status: valor['status'],
+    );
   }
 }

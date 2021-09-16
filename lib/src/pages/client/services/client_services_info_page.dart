@@ -152,7 +152,7 @@ class _ClientInfoServiceState extends State<ClientInfoService> {
       'correoVen': service.contact,
       'statusCompra': 'pendiente',
       'statusVenta': 'pendiente',
-      'fechaEntrega': 'pendiente'
+      'fechaProbableEntrega': 'pendiente'
     }).then((_) => Navigator.pop(context));
   }
 }

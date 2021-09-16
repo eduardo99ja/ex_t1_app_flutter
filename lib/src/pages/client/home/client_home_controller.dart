@@ -43,4 +43,8 @@ class ClientHomeController {
   void goToHome() {
     Navigator.pushNamed(context, 'client/home');
   }
+
+  void goToCart() {
+    Navigator.pushNamed(context, 'client/cart');
+  }
 }
