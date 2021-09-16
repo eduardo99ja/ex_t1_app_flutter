@@ -47,4 +47,8 @@ class SellerHomeController {
   void goToCredits() {
     Navigator.pushNamed(context, 'credits');
   }
+
+  void goToSearch() {
+    Navigator.pushNamed(context, 'seller/services/search');
+  }
 }
