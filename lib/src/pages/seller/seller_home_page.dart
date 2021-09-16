@@ -127,7 +127,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
             ),
             ListTile(
               title: Text('Ventas'),
-              trailing: Icon(Icons.delete),
+              trailing: Icon(Icons.shopping_bag),
               onTap: _con.goToOrders,
             ),
             ListTile(

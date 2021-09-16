@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ex_t1_app/src/models/compra.dart';
 import 'package:ex_t1_app/src/models/service.dart';
+import 'package:ex_t1_app/src/pages/seller/orders/seller_orders_info.dart';
 import 'package:ex_t1_app/src/pages/seller/services/info/seller_services_info_page.dart';
 import 'package:ex_t1_app/src/providers/auth_provider.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
@@ -90,6 +91,13 @@ class _SellerOrdersPendingTabState extends State<SellerOrdersPendingTab> {
                                       NetworkImage(_services![position].servicio!.img!))
                             ],
                           ),
+                          onLongPress: () {
+                            showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) => InfoServiceOrder(
+                                    service: _services![position])); //Using anonimous function
+                          },
                           onTap: () {
                             _setOrder(_services![position]);
                           },
