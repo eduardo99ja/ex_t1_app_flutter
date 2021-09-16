@@ -78,39 +78,30 @@ class _SellerHomePageState extends State<SellerHomePage> {
             DrawerHeader(
               decoration: BoxDecoration(color: MyColors.primaryColor),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     '${_con.user?.name ?? ''} ${_con.user?.lastname ?? ''}',
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 20.0,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: 1,
                   ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Text(
                     _con.user?.email ?? '',
                     style: TextStyle(
-                      fontSize: 13.0,
-                      color: Colors.grey[300],
+                      fontSize: 18.0,
+                      color: Colors.white70,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
                     ),
                     maxLines: 1,
-                  ),
-                  Container(
-                    height: 60.0,
-                    margin: EdgeInsets.only(top: 10.0),
-                    child: FadeInImage(
-                      image: (_con.user?.image != null)
-                          ? NetworkImage(_con.user!.image!)
-                          : AssetImage('assets/img/no-image.png')
-                              as ImageProvider,
-                      fit: BoxFit.contain,
-                      fadeInDuration: Duration(milliseconds: 50),
-                      placeholder: AssetImage('assets/img/no-image.png'),
-                    ),
                   ),
                 ],
               ),
