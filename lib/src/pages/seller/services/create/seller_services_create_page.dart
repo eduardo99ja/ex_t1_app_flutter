@@ -10,8 +10,7 @@ class SellerServicesCreatePage extends StatefulWidget {
   const SellerServicesCreatePage({Key? key}) : super(key: key);
 
   @override
-  _SellerServicesCreatePageState createState() =>
-      _SellerServicesCreatePageState();
+  _SellerServicesCreatePageState createState() => _SellerServicesCreatePageState();
 }
 
 class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
@@ -90,8 +89,7 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.nameController,
         maxLines: 1,
@@ -114,8 +112,7 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.contactController,
         maxLines: 1,
@@ -139,8 +136,7 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.descriptionController,
         maxLines: 3,
@@ -164,8 +160,7 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.priceController,
         keyboardType: TextInputType.number,
@@ -222,8 +217,7 @@ class _SellerServicesCreatePageState extends State<SellerServicesCreatePage> {
         onPressed: _con.createService,
         child: Text('CREAR SERVICIO'),
         style: ElevatedButton.styleFrom(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             primary: MyColors.primaryColor),
       ),
     );

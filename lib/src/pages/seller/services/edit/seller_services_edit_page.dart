@@ -11,8 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SellerServicesEditPage extends StatefulWidget {
   final Service service;
-  const SellerServicesEditPage({Key? key, required this.service})
-      : super(key: key);
+  const SellerServicesEditPage({Key? key, required this.service}) : super(key: key);
 
   @override
   _SellerServicesEditPageState createState() => _SellerServicesEditPageState();
@@ -33,6 +32,7 @@ class _SellerServicesEditPageState extends State<SellerServicesEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: MyColors.primaryColor,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'Editar servicio',
@@ -95,8 +95,7 @@ class _SellerServicesEditPageState extends State<SellerServicesEditPage> {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.nameController,
         maxLines: 1,
@@ -119,8 +118,7 @@ class _SellerServicesEditPageState extends State<SellerServicesEditPage> {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.contactController,
         maxLines: 1,
@@ -144,8 +142,7 @@ class _SellerServicesEditPageState extends State<SellerServicesEditPage> {
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.descriptionController,
         maxLines: 3,
@@ -169,8 +166,7 @@ class _SellerServicesEditPageState extends State<SellerServicesEditPage> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
+          color: MyColors.primaryOpacityColor, borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.priceController,
         keyboardType: TextInputType.number,
@@ -212,8 +208,7 @@ class _SellerServicesEditPageState extends State<SellerServicesEditPage> {
                   width: MediaQuery.of(context).size.width * 0.26,
                   child: FadeInImage(
                     image: NetworkImage(widget.service.img!),
-                    placeholder:
-                        AssetImage('assets/img/add-image-placeholder.png'),
+                    placeholder: AssetImage('assets/img/add-image-placeholder.png'),
                   )),
             ),
     );
@@ -228,8 +223,7 @@ class _SellerServicesEditPageState extends State<SellerServicesEditPage> {
         onPressed: _con.editService,
         child: Text('EDITAR SERVICIO'),
         style: ElevatedButton.styleFrom(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             primary: MyColors.primaryColor),
       ),
     );

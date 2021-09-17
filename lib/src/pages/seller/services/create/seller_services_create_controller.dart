@@ -38,7 +38,7 @@ class SellerServicesCreateController {
 
   late ProgressDialog _progressDialog;
   CameraPosition initialPosition =
-      CameraPosition(target: LatLng(-99.5316192, -99.5316192), zoom: 16.0);
+      CameraPosition(target: LatLng(-99.5316192, -99.5316192), zoom: 8.0);
   Completer<GoogleMapController> _mapController = Completer();
 
   Future init(BuildContext context, Function refresh) async {
@@ -47,8 +47,8 @@ class SellerServicesCreateController {
     serviceRef = FirebaseDatabase.instance.reference().child('services');
     _storageProvider = new StorageProvider();
     checkGPS();
-    _progressDialog = new ProgressDialog(context,
-        title: Text('Expere....'), message: Text('Cargando...'));
+    _progressDialog =
+        new ProgressDialog(context, title: Text('Expere....'), message: Text('Cargando...'));
     user = User.fromJson(await sharedPref.read('user'));
   }
 
@@ -65,6 +65,7 @@ class SellerServicesCreateController {
         imageFile1 = File(pickedFile!.path);
       }
     }
+
     Navigator.pop(context);
     refresh();
   }
@@ -158,12 +159,8 @@ class SellerServicesCreateController {
     String contact = contactController.text;
     String price = priceController.text;
 
-    if (name.isEmpty ||
-        description.isEmpty ||
-        contact.isEmpty ||
-        price.isEmpty) {
-      final snackBar =
-          SnackBar(content: Text('Debes ingresar todos los campos'));
+    if (name.isEmpty || description.isEmpty || contact.isEmpty || price.isEmpty) {
+      final snackBar = SnackBar(content: Text('Debes ingresar todos los campos'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return;
     }
@@ -172,8 +169,7 @@ class SellerServicesCreateController {
       TaskSnapshot snapshot = await _storageProvider.uploadFile(pickedFile!);
       imageUrl = await snapshot.ref.getDownloadURL();
     } else {
-      final snackBar =
-          SnackBar(content: Text('No ha seleccionado ninguna imagen'));
+      final snackBar = SnackBar(content: Text('No ha seleccionado ninguna imagen'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       _progressDialog.dismiss();
       return;
@@ -190,10 +186,7 @@ class SellerServicesCreateController {
         seller: user!.email,
         status: 'activo');
 
-    await serviceRef
-        .push()
-        .set(_service.toJson())
-        .then((_) => {Navigator.pop(context)});
+    await serviceRef.push().set(_service.toJson()).then((_) => {Navigator.pop(context)});
     _progressDialog.dismiss();
   }
 }
