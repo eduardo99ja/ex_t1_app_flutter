@@ -17,7 +17,6 @@ class RegisterController {
 
   late AuthProvider _authProvider;
   late final userRef;
-  late ProgressDialog progressDialog;
 
   late SharedPref _sharedPref;
   String? _typeUser;
@@ -26,14 +25,15 @@ class RegisterController {
     this.context = context;
     userRef = FirebaseDatabase.instance.reference();
     _authProvider = new AuthProvider();
-    progressDialog = ProgressDialog(context,
-        message: Text("Por favor, espere un momento"), title: Text("Cargando"));
+
     _sharedPref = new SharedPref();
     _typeUser = await _sharedPref.read('typeUser');
     print(_typeUser);
   }
 
   void register() async {
+    ProgressDialog progressDialog = ProgressDialog(context,
+        message: Text("Por favor, espere un momento"), title: Text("Cargando"));
     String username = usernameController.text;
     String name = nameController.text;
     String lastname = lastnameController.text;
@@ -41,14 +41,13 @@ class RegisterController {
     String confirmPassword = confirmPasswordController.text.trim();
     String password = passwordController.text.trim();
 
-    if (username.isEmpty &&
-        email.isEmpty &&
-        password.isEmpty &&
-        confirmPassword.isEmpty &&
-        name.isEmpty &&
+    if (username.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty ||
+        name.isEmpty ||
         lastname.isEmpty) {
-      final snackBar =
-          SnackBar(content: Text('Debes ingresar todos los campos'));
+      final snackBar = SnackBar(content: Text('Debes ingresar todos los campos'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
       return;
@@ -62,8 +61,7 @@ class RegisterController {
 
     if (password.length < 6) {
       print('el password debe tener al menos 6 caracteres');
-      final snackBar = SnackBar(
-          content: Text('La contraseña debe tener al menos 6 caracteres'));
+      final snackBar = SnackBar(content: Text('La contraseña debe tener al menos 6 caracteres'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
       return;
@@ -91,10 +89,8 @@ class RegisterController {
             "name": user.name,
             "lastname": user.lastname,
             "id": user.id
-          }).then((_) => {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, 'seller/home', (route) => false)
-              });
+          }).then(
+              (_) => {Navigator.pushNamedAndRemoveUntil(context, 'seller/home', (route) => false)});
         } else if (_typeUser == 'client') {
           await userRef.child('clientes').push().set({
             "username": usernameController.text,
@@ -102,16 +98,13 @@ class RegisterController {
             "name": user.name,
             "lastname": user.lastname,
             "id": user.id
-          }).then((_) => {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, 'client/home', (route) => false)
-              });
+          }).then(
+              (_) => {Navigator.pushNamedAndRemoveUntil(context, 'client/home', (route) => false)});
         }
       } else {
         progressDialog.dismiss();
 
-        final snackBar =
-            SnackBar(content: Text('El usuario no se pudó registrar'));
+        final snackBar = SnackBar(content: Text('El usuario no se pudó registrar'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (error) {

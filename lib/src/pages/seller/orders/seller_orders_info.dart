@@ -1,3 +1,4 @@
+import 'package:ex_t1_app/src/models/compra.dart';
 import 'package:ex_t1_app/src/models/service.dart';
 import 'package:ex_t1_app/src/pages/seller/services/edit/seller_services_edit_page.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -6,19 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart' as utils;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class InfoService extends StatefulWidget {
-  final Service service;
+class InfoServiceOrder extends StatefulWidget {
+  final Compra service;
 
-  InfoService({Key? key, required this.service}) : super(key: key);
+  InfoServiceOrder({Key? key, required this.service}) : super(key: key);
 
   @override
-  _InfoServiceState createState() => _InfoServiceState();
+  _InfoServiceOrderState createState() => _InfoServiceOrderState();
 }
 
-final serviceRef = FirebaseDatabase.instance.reference().child('services');
+final serviceRef = FirebaseDatabase.instance.reference().child('compras');
 
-class _InfoServiceState extends State<InfoService> {
-  List<Service>? items;
+class _InfoServiceOrderState extends State<InfoServiceOrder> {
+  List<Compra>? items;
   @override
   void initState() {
     super.initState();
@@ -29,7 +30,7 @@ class _InfoServiceState extends State<InfoService> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Informacion del servicio'),
+        title: Text('Informacion de la compra'),
         backgroundColor: utils.MyColors.primaryColor,
         automaticallyImplyLeading: false,
       ),
@@ -47,34 +48,34 @@ class _InfoServiceState extends State<InfoService> {
                         height: 200,
                         width: MediaQuery.of(context).size.width * 0.60,
                         child: Image.network(
-                          widget.service.img!,
+                          widget.service.servicio!.img!,
                           fit: BoxFit.fill,
                         )),
                   ),
-                  Text('${widget.service.name}',
+                  Text('${widget.service.servicio!.name}',
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
-                  Text('Descripción: ${widget.service.description}',
+                  Text('Descripción: ${widget.service.servicio!.description}',
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
-                  Text('Precio: \$${widget.service.price}',
+                  Text('Precio: \$${widget.service.servicio!.price}',
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
-                  Text('Contácto: ${widget.service.contact}',
+                  Text('Cliente: ${widget.service.correoComprador}',
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
-                  Text('Status: ${widget.service.status}',
+                  Text('Entrega: ${widget.service.fechaProbableEntrega}',
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontStyle: FontStyle.italic, fontSize: 16)),
                   Divider(),
                   Container(
                     child: Stack(
                       children: [
-                        mapaView(widget.service.lat!, widget.service.lng!),
+                        mapaView(widget.service.servicio!.lat!, widget.service.servicio!.lng!),
                         Container(
                           child: Icon(
                             Icons.pin_drop_rounded,
@@ -98,22 +99,6 @@ class _InfoServiceState extends State<InfoService> {
                           },
                         ),
                       ),
-                      widget.service.status! == 'activo'
-                          ? Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          SellerServicesEditPage(service: widget.service),
-                                    ),
-                                  );
-                                },
-                                child: Text('Editar'),
-                              ),
-                            )
-                          : Container()
                     ],
                   )
                 ],

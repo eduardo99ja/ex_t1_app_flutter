@@ -4,7 +4,7 @@ import 'package:ex_t1_app/src/models/user.dart';
 
 import 'package:ex_t1_app/src/utils/shared_pref.dart';
 
-class SellerHomeController {
+class ClientHomeController {
   late BuildContext context;
   SharedPref _sharedPref = SharedPref();
   GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
@@ -32,27 +32,19 @@ class SellerHomeController {
     Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
   }
 
-  void goToUpdatePage() {
-    Navigator.pushNamed(context, 'seller/update');
-  }
-
-  void goToCreate() {
-    Navigator.pushNamed(context, 'seller/services/create');
-  }
-
   void goToList() {
-    Navigator.pushNamed(context, 'seller/services/list');
+    Navigator.pushNamed(context, 'client/services/list');
   }
 
   void goToCredits() {
     Navigator.pushNamed(context, 'credits');
   }
 
-  void goToSearch() {
-    Navigator.pushNamed(context, 'seller/services/search');
+  void goToHome() {
+    Navigator.pushNamed(context, 'client/home');
   }
 
-  void goToOrders() {
-    Navigator.pushNamed(context, 'seller/orders');
+  void goToCart() {
+    Navigator.pushNamed(context, 'client/cart');
   }
 }

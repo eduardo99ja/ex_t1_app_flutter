@@ -1,29 +1,32 @@
 import 'dart:async';
 
+import 'package:ex_t1_app/src/models/compra.dart';
 import 'package:ex_t1_app/src/models/service.dart';
+import 'package:ex_t1_app/src/pages/seller/orders/seller_orders_info.dart';
 import 'package:ex_t1_app/src/pages/seller/services/info/seller_services_info_page.dart';
 import 'package:ex_t1_app/src/providers/auth_provider.dart';
+import 'package:ex_t1_app/src/utils/my_colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class SellerServicesStatusActive extends StatefulWidget {
-  const SellerServicesStatusActive({Key? key}) : super(key: key);
+class ClientServicesCartTab extends StatefulWidget {
+  const ClientServicesCartTab({Key? key}) : super(key: key);
 
   @override
-  _SellerServicesStatusActiveState createState() => _SellerServicesStatusActiveState();
+  _ClientServicesCartTabState createState() => _ClientServicesCartTabState();
 }
 
-class _SellerServicesStatusActiveState extends State<SellerServicesStatusActive> {
-  List<Service>? _services;
+class _ClientServicesCartTabState extends State<ClientServicesCartTab> {
+  List<Compra>? _services;
   StreamSubscription<Event>? _addServicio;
   StreamSubscription<Event>? _changeService;
   final _servicesRef = FirebaseDatabase.instance
       .reference()
-      .child('services')
-      .orderByChild('status')
-      .equalTo('activo');
-  final _dbRef = FirebaseDatabase.instance.reference().child('services');
+      .child('compras')
+      .orderByChild('statusCompra')
+      .equalTo('pendiente');
+  final _dbRef = FirebaseDatabase.instance.reference().child('compras');
 
   // AuthProvider
 
@@ -55,80 +58,71 @@ class _SellerServicesStatusActiveState extends State<SellerServicesStatusActive>
                       Expanded(
                         child: Dismissible(
                           key: Key(_services![position].id!),
-                          direction: DismissDirection.horizontal,
+                          direction: DismissDirection.startToEnd,
                           onDismissed: (DismissDirection direction) {
-                            print(direction);
-                            if (direction == DismissDirection.endToStart) {
-                              _setInactive(_services![position]);
-                            } else if (direction == DismissDirection.startToEnd) {
-                              _borrarService(context, _services![position], position);
-                            }
+                            _setOrder(_services![position]);
                           },
-                          secondaryBackground: Container(
-                              padding: EdgeInsets.only(left: 8.0),
-                              color: Colors.orangeAccent,
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Text('Marcar como inactivo',
-                                    style: TextStyle(color: Colors.white)),
-                              )),
                           background: Container(
                               padding: EdgeInsets.only(left: 8.0),
-                              color: Colors.red,
+                              color: MyColors.primaryColorDark,
                               child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Eliminar servicio',
-                                    style: TextStyle(color: Colors.white)),
+                                child:
+                                    Text('Confirmar compra', style: TextStyle(color: Colors.white)),
                               )),
                           child: Row(
                             children: [
                               Expanded(
                                 child: ListTile(
                                   title: Text(
-                                    '${_services![position].name}',
+                                    '${_services![position].servicio!.name}',
                                     style: TextStyle(
                                       color: Colors.grey[900],
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  subtitle: Text(
-                                    '${_services![position].description}',
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontSize: 18.0,
-                                      fontStyle: FontStyle.italic,
-                                    ),
-                                  ),
+                                  subtitle: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Tel. ${_services![position].servicio!.contact}',
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 18.0,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Vendedor: ${_services![position].servicio!.seller}',
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 18.0,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ]),
                                   leading: Column(
                                     children: [
                                       CircleAvatar(
-                                        backgroundColor: Colors.grey,
-                                        radius: 17.0,
-                                        child: Text(
-                                          '${position + 1}',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 21.0,
-                                          ),
-                                        ),
-                                      )
+                                          radius: 25.0,
+                                          backgroundImage:
+                                              NetworkImage(_services![position].servicio!.img!))
                                     ],
                                   ),
                                   onTap: () {
                                     showModalBottomSheet(
                                         isScrollControlled: true,
                                         context: context,
-                                        builder: (context) => InfoService(
-                                            service:
-                                                _services![position])); //Using anonimous function
+                                        builder: (context) =>
+                                            InfoServiceOrder(service: _services![position]));
                                   },
                                 ),
                               ),
                               Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Text(
-                                  '\$${_services![position].price}',
+                                  '\$${_services![position].servicio!.price}',
                                   style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 18.0,
@@ -153,18 +147,18 @@ class _SellerServicesStatusActiveState extends State<SellerServicesStatusActive>
 
   void _agregarService(Event event) {
     setState(() {
-      _services!.add(Service.fromSnapShot(event.snapshot));
+      _services!.add(Compra.fromSnapshot(event.snapshot));
     });
   }
 
   void _updateServices(Event event) {
     var oldService = _services!.singleWhere((service) => service.id == event.snapshot.key);
     setState(() {
-      _services?[_services!.indexOf(oldService)] = Service.fromSnapShot(event.snapshot);
+      _services?[_services!.indexOf(oldService)] = Compra.fromSnapshot(event.snapshot);
     });
   }
 
-  void _borrarService(BuildContext context, Service game, int position) async {
+  void _borrarService(BuildContext context, Compra game, int position) async {
     await _dbRef.child(game.id!).remove().then((_) {
       setState(() {
         _services!.removeAt(position);
@@ -172,20 +166,17 @@ class _SellerServicesStatusActiveState extends State<SellerServicesStatusActive>
     });
   }
 
-  void _setInactive(Service servicio) {
-    _dbRef.child(servicio.id!).set({
-      'name': servicio.name,
-      'lat': servicio.lat,
-      'lng': servicio.lng,
-      'seller': servicio.seller,
-      'img': servicio.img,
-      'contact': servicio.contact,
-      'price': servicio.price,
-      'description': servicio.description,
-      'status': 'inactivo'
+  void _setOrder(Compra compra) async {
+    await _dbRef.child(compra.id!).set({
+      'servicio': compra.servicio!.toJson(),
+      'correoComprador': compra.correoComprador,
+      'correoVen': compra.correoVend,
+      'statusCompra': 'confirmada',
+      'statusVenta': 'pendiente',
+      'fechaProbableEntrega': compra.fechaProbableEntrega
     }).then((value) {
       setState(() {
-        _services!.removeAt(_services!.indexOf(servicio));
+        _services!.removeAt(_services!.indexOf(compra));
       });
     });
   }

@@ -10,8 +10,7 @@ class SellerServicesSearchPage extends StatefulWidget {
   const SellerServicesSearchPage({Key? key}) : super(key: key);
 
   @override
-  _SellerServicesSearchPageState createState() =>
-      _SellerServicesSearchPageState();
+  _SellerServicesSearchPageState createState() => _SellerServicesSearchPageState();
 }
 
 class _SellerServicesSearchPageState extends State<SellerServicesSearchPage> {
@@ -167,8 +166,8 @@ class _SellerServicesSearchPageState extends State<SellerServicesSearchPage> {
           contact: values[key]['contact'],
           img: values[key]['img'],
           lat: values[key]['lat'],
-          lng: values[key]['name'],
-          price: values[key]['name'],
+          lng: values[key]['lng'],
+          price: values[key]['price'],
           seller: values[key]['seller'],
           status: values[key]['status'],
         );
@@ -196,11 +195,9 @@ class _SellerServicesSearchPageState extends State<SellerServicesSearchPage> {
   }
 
   void _updateServices(Event event) {
-    var oldService =
-        _services!.singleWhere((service) => service.id == event.snapshot.key);
+    var oldService = _services!.singleWhere((service) => service.id == event.snapshot.key);
     setState(() {
-      _services?[_services!.indexOf(oldService)] =
-          Service.fromSnapShot(event.snapshot);
+      _services?[_services!.indexOf(oldService)] = Service.fromSnapShot(event.snapshot);
     });
   }
 }
