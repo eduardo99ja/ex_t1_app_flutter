@@ -3,6 +3,7 @@ import 'package:ex_t1_app/src/providers/auth_provider.dart';
 import 'package:ex_t1_app/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:video_player/video_player.dart';
 
 class SellerHomePage extends StatefulWidget {
   const SellerHomePage({Key? key}) : super(key: key);
@@ -14,13 +15,29 @@ class SellerHomePage extends StatefulWidget {
 class _SellerHomePageState extends State<SellerHomePage> {
   SellerHomeController _con = SellerHomeController();
   late AuthProvider _authProvider;
+  late VideoPlayerController _controller;
+
   @override
   void initState() {
     super.initState();
+    _controller = VideoPlayerController.asset('assets/video/video.mp4');
+    _controller.addListener(() {
+      setState(() {});
+    });
+    _controller.initialize().then((value) {
+      setState(() {});
+    });
+    _controller.play();
     SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
       _con.init(context, refresh);
     });
     _authProvider = new AuthProvider();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -52,8 +69,39 @@ class _SellerHomePageState extends State<SellerHomePage> {
         ],
       ),
       drawer: _drawer(),
-      body: Container(
-        child: Text('Vendedor'),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    VideoPlayer(_controller),
+                    VideoProgressIndicator(
+                      _controller,
+                      allowScrubbing: true,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _controller.pause();
+              },
+              child: Icon(Icons.pause),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _controller.pause();
+              },
+              child: Icon(Icons.pause),
+            ),
+          ],
+        ),
       ),
     );
   }
