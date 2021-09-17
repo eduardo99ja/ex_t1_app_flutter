@@ -17,7 +17,6 @@ class RegisterController {
 
   late AuthProvider _authProvider;
   late final userRef;
-  late ProgressDialog progressDialog;
 
   late SharedPref _sharedPref;
   String? _typeUser;
@@ -26,14 +25,15 @@ class RegisterController {
     this.context = context;
     userRef = FirebaseDatabase.instance.reference();
     _authProvider = new AuthProvider();
-    progressDialog = ProgressDialog(context,
-        message: Text("Por favor, espere un momento"), title: Text("Cargando"));
+
     _sharedPref = new SharedPref();
     _typeUser = await _sharedPref.read('typeUser');
     print(_typeUser);
   }
 
   void register() async {
+    ProgressDialog progressDialog = ProgressDialog(context,
+        message: Text("Por favor, espere un momento"), title: Text("Cargando"));
     String username = usernameController.text;
     String name = nameController.text;
     String lastname = lastnameController.text;
