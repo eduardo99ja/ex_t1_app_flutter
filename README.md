@@ -1,16 +1,13 @@
 # ex_t1_app
 
-A new Flutter project.
+Flutter services project 
 
-## Getting Started
+## Screens
+### Client's Home
+<img src="https://firebasestorage.googleapis.com/v0/b/ex-t1-app-flutter.appspot.com/o/clienthome.jpg?alt=media&token=a0562085-b643-4340-af06-5d1b7da0e414"/>
 
-This project is a starting point for a Flutter application.
+### List Services
+<img src="https://firebasestorage.googleapis.com/v0/b/ex-t1-app-flutter.appspot.com/o/listservices.jpg?alt=media&token=5d6cfadf-519c-44e6-99d1-9e105c1fbbb7"/><img src="https://firebasestorage.googleapis.com/v0/b/ex-t1-app-flutter.appspot.com/o/searchServices.jpg?alt=media&token=a6383f39-3249-4549-b4b3-0f113e66f623"/>
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Service's details
+<img src="https://firebasestorage.googleapis.com/v0/b/ex-t1-app-flutter.appspot.com/o/detailsService.jpg?alt=media&token=8ab274b0-a956-40f3-9c92-e62e873fc65e"/>
