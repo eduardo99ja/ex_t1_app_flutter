@@ -37,7 +37,7 @@ class LoginController {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    if (email.isEmpty && password.isEmpty) {
+    if (email.isEmpty || password.isEmpty) {
       final snackBar = SnackBar(content: Text('Debes ingresar sus credenciales'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
