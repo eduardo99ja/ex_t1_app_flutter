@@ -90,7 +90,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                _controller.pause();
+                _controller.value.isPlaying ? _controller.pause() : _controller.play();
               },
               child: Icon(Icons.pause),
             ),

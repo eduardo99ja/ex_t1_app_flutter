@@ -90,13 +90,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                _controller.pause();
-              },
-              child: Icon(Icons.pause),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _controller.pause();
+                _controller.value.isPlaying ? _controller.pause() : _controller.play();
               },
               child: Icon(Icons.pause),
             ),
