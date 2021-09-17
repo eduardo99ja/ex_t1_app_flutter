@@ -80,6 +80,7 @@ class LoginController {
             }
           });
         } else if (_typeUser == 'client') {
+          print('es cliente');
           bool flag = false;
           Query _compradorQuery =
               userRef.child('clientes').orderByChild("email").equalTo(emailController.text);

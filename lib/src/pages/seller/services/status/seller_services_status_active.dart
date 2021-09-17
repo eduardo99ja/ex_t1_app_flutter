@@ -11,12 +11,10 @@ class SellerServicesStatusActive extends StatefulWidget {
   const SellerServicesStatusActive({Key? key}) : super(key: key);
 
   @override
-  _SellerServicesStatusActiveState createState() =>
-      _SellerServicesStatusActiveState();
+  _SellerServicesStatusActiveState createState() => _SellerServicesStatusActiveState();
 }
 
-class _SellerServicesStatusActiveState
-    extends State<SellerServicesStatusActive> {
+class _SellerServicesStatusActiveState extends State<SellerServicesStatusActive> {
   List<Service>? _services;
   StreamSubscription<Event>? _addServicio;
   StreamSubscription<Event>? _changeService;
@@ -62,10 +60,8 @@ class _SellerServicesStatusActiveState
                             print(direction);
                             if (direction == DismissDirection.endToStart) {
                               _setInactive(_services![position]);
-                            } else if (direction ==
-                                DismissDirection.startToEnd) {
-                              _borrarService(
-                                  context, _services![position], position);
+                            } else if (direction == DismissDirection.startToEnd) {
+                              _borrarService(context, _services![position], position);
                             }
                           },
                           secondaryBackground: Container(
@@ -124,8 +120,8 @@ class _SellerServicesStatusActiveState
                                         isScrollControlled: true,
                                         context: context,
                                         builder: (context) => InfoService(
-                                            service: _services![
-                                                position])); //Using anonimous function
+                                            service:
+                                                _services![position])); //Using anonimous function
                                   },
                                 ),
                               ),
@@ -162,11 +158,9 @@ class _SellerServicesStatusActiveState
   }
 
   void _updateServices(Event event) {
-    var oldService =
-        _services!.singleWhere((service) => service.id == event.snapshot.key);
+    var oldService = _services!.singleWhere((service) => service.id == event.snapshot.key);
     setState(() {
-      _services?[_services!.indexOf(oldService)] =
-          Service.fromSnapShot(event.snapshot);
+      _services?[_services!.indexOf(oldService)] = Service.fromSnapShot(event.snapshot);
     });
   }
 

@@ -18,7 +18,7 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
   bool searchState = false;
   List<Service>? _services;
   StreamSubscription<Event>? _addServicio;
-  StreamSubscription<Event>? _changeService;
+  // StreamSubscription<Event>? _changeService;
   final _dbRef = FirebaseDatabase.instance
       .reference()
       .child('services')
@@ -28,7 +28,7 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
   void initState() {
     super.initState();
     _addServicio = _dbRef.onChildAdded.listen(_agregarService);
-    _changeService = _dbRef.onChildChanged.listen(_updateServices);
+    // _changeService = _dbRef.onChildChanged.listen(_updateServices);
     _services = [];
   }
 
@@ -36,7 +36,7 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
   void dispose() {
     super.dispose();
     _addServicio!.cancel();
-    _changeService!.cancel();
+    // _changeService!.cancel();
   }
 
   @override
@@ -56,7 +56,6 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
                     hintText: 'Buscar...',
                     hintStyle: TextStyle(color: Colors.white)),
                 onChanged: (text) {
-                  print('entro busqueda');
                   searchMethod(text);
                 },
               ),
@@ -103,10 +102,13 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
-            isScrollControlled: false,
-            context: context,
-            builder: (context) =>
-                ClientInfoService(service: _services![index])); //Using anonimous function
+          isScrollControlled: false,
+          context: context,
+          builder: (context) {
+            print(_services![index]);
+            return ClientInfoService(service: _services![index]); //Using anonimous function
+          },
+        );
       },
       child: Container(
         height: 250,
@@ -191,11 +193,12 @@ class _ClientServicesListPageState extends State<ClientServicesListPage> {
           contact: values[key]['contact'],
           img: values[key]['img'],
           lat: values[key]['lat'],
-          lng: values[key]['name'],
-          price: values[key]['name'],
+          lng: values[key]['lng'],
+          price: values[key]['price'],
           seller: values[key]['seller'],
           status: values[key]['status'],
         );
+
         if (service.name!.contains(text)) {
           _services!.add(service);
         }
